@@ -1,12 +1,12 @@
 // 监听标签更新事件
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete") {
-    checkDuplicateTabs(tab);
+    checkAndCloseDuplicateTabs(tab);
   }
 });
 
 // 检查并关闭重复标签页
-function checkDuplicateTabs(newTab) {
+function checkAndCloseDuplicateTabs(newTab) {
   chrome.tabs.query({}, (tabs) => {
     const duplicateTabs = tabs.filter(
       (tab) => tab.url === newTab.url && tab.id !== newTab.id

@@ -23,7 +23,7 @@ document.getElementById('close-duplicates').addEventListener('click', () => {
 });
 
 // 按地址排序标签页
-document.getElementById('group-tabs').addEventListener('click', () => {
+document.getElementById('sort-tabs').addEventListener('click', () => {
   chrome.runtime.sendMessage({ action: 'sortTabs' }, (response) => {
     if (response && response.success) {
       loadTabs(); // 刷新标签页列表
