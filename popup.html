@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tab Manager</title>
+  <style>
+    body {
+      width: 300px;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+    }
+    button {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #tabs-list {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 5px;
+    }
+    .tab-item {
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    .tab-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <button id="close-duplicates">关闭重复标签页</button>
+  <button id="group-tabs">按地址排序标签页</button>
+
+  <div id="tabs-list">
+    <!-- 标签页列表将动态加载到这里 -->
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
