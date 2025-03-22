@@ -20,13 +20,19 @@ function checkAndCloseDuplicateTabs(newTab) {
   });
 }
 
-// 按地址排序标签页
-function sortTabsByUrl() {
-  chrome.tabs.query({}, (tabs) => {
-    tabs.sort((a, b) => {
-      const urlA = new URL(a.url);
-      const urlB = new URL(b.url);
-      return urlA.pathname.localeCompare(urlB.pathname);
+// 排序函数：按 URL 字典序排序
+function sortTabsByURL(tabs) {
+  return tabs.sort((a, b) => a.url.localeCompare(b.burl));
+}
+
+// 获取当前窗口的标签页并重新排序
+function reorderTabs() {
+  chrome.tabs.query({ currentWindow: true }, (tabs) => {
+    const sortedTabs = sortTabsByURL(tabs);
+
+    // 按排序后的顺序移动标签页
+    sortedTabs.forEach((tab, index) => {
+      chrome.tabs.move(tab.id, { index: index });
     });
   });
 }
@@ -54,8 +60,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true; // 保持消息通道打开以发送响应
   }
 
-  if (request.action === "sortTabs") {
-    sortTabsByUrl();
+  if (request.action === "reorderTabs") {
+    reorderTabs();
     sendResponse({ success: true });
     return true;
   }
