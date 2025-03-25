@@ -3,7 +3,7 @@
   "name": "Tab Manager",
   "version": "1.0",
   "description": "Manage browser tabs with duplicate closing and sorting features",
-  "permissions": ["tabs", "tabGroups"],
+  "permissions": ["tabs", "tabGroups", "scripting"],
   "background": {
     "service_worker": "background.js"
   },
