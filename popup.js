@@ -31,5 +31,19 @@ document.getElementById('reorder-tabs').addEventListener('click', () => {
   });
 });
 
+// 滚动当前标签页到底部
+document.getElementById('scroll-to-bottom').addEventListener('click', () => {
+  chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    if (tabs[0]) {
+      chrome.scripting.executeScript({
+        target: {tabId: tabs[0].id},
+        function: () => {
+          window.scrollTo(0, document.body.scrollHeight);
+        }
+      });
+    }
+  });
+});
+
 // 初始化加载标签页
 loadTabs();

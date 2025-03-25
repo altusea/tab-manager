@@ -20,15 +20,15 @@ function checkAndCloseDuplicateTabs(newTab) {
   });
 }
 
-// 排序函数：按 URL 字典序排序
-function sortTabsByURL(tabs) {
-  return tabs.sort((a, b) => a.url.localeCompare(b.burl));
-}
-
 // 获取当前窗口的标签页并重新排序
 function reorderTabs() {
-  chrome.tabs.query({ currentWindow: true }, (tabs) => {
-    const sortedTabs = sortTabsByURL(tabs);
+  chrome.tabs.query({ currentWindow: true }, (es) => {
+    if (es.length < 2) {
+      return;
+    }
+
+    const sortedTabs = es.sort((a, b) => a.url.localeCompare(b.burl));
+    console.log(sortedTabs);
 
     // 按排序后的顺序移动标签页
     sortedTabs.forEach((tab, index) => {
